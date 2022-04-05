@@ -16,9 +16,11 @@
     "dotenv": "^10.0.0"
   },
   "scripts": {
-    "deploy": "npx hardhat run scripts/deploy.js --network cronos",
+    "deploy": "npx hardhat run scripts/deploy.js --network local",
+    "deploy:cronos": "npx hardhat run scripts/deploy.js --network cronos",
     "lint": "npx hardhat check",
     "test": "npx hardhat test",
-    "console": "npx hardhat console --network cronos"
+    "console": "npx hardhat console --network local",
+    "console:cronos": "npx hardhat console --network cronos"
   }
 }

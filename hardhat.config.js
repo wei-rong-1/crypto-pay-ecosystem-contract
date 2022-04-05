@@ -14,13 +14,13 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 const getHDWallet = () => {
   const { MNEMONIC, PRIVATE_KEY } = process.env;
+  if (PRIVATE_KEY && PRIVATE_KEY !== "") {
+    return [PRIVATE_KEY]
+  }
   if (MNEMONIC && MNEMONIC !== "") {
     return {
       mnemonic: MNEMONIC,
     }
-  }
-  if (PRIVATE_KEY && PRIVATE_KEY !== "") {
-    return [PRIVATE_KEY]
   }
   throw Error("Private Key Not Set! Please set up .env");
 }
@@ -30,8 +30,13 @@ const getHDWallet = () => {
  */
 module.exports = {
   networks: {
-    cronos: {
+    local: {
       url: "http://localhost:7545",
+      accounts: getHDWallet(),
+    },
+    cronos: {
+      url: "https://cronos-testnet-3.crypto.org:8545/",
+      chainId: 338,
       accounts: getHDWallet(),
     },
   },
